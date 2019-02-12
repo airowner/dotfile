@@ -1,22 +1,5 @@
 " ========================= Plugin Config Start =========================
 
-" AirLine
-let g:airline_powerline_fonts = 1
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#branch#enabled = 0
-let g:airline#parts#ffenc#skip_expected_string = 'utf-8[unix]'
-" let g:airline_theme = "zenburn"
-let g:airline_theme = "ayu_mirage"
-
-" use Aix.font
-if(has("gui_running"))
-  let g:airline_left_sep='◣'
-  let g:airline_right_sep='◥'
-else
-  let g:airline_left_sep=''
-  let g:airline_right_sep=''
-endif
-
 " Set Ale Cheacker
 let g:ale_sign_error = '×'
 let g:ale_sign_warning = '*'
@@ -132,23 +115,6 @@ let g:incsearch#auto_nohlsearch = 1
 " Python snytax configure
 let python_self_cls_highlight = 1
 
-" ColorFul NERDTree Settings
-let g:NERDTreeRespectWildIgnore=1
-let g:NERDTreeDirArrows=0
-let g:NERDTreeDirArrowExpandable = '▷'
-let g:NERDTreeDirArrowCollapsible = '▼'
-let g:NERDTreeIndicatorMapCustom = {
-    	\ "Modified"  : "o",
-    	\ "Staged"    : "*",
-    	\ "Untracked" : "+",
-    	\ "Renamed"   : ">",
-    	\ "Unmerged"  : "=",
-    	\ "Deleted"   : "-",
-    	\ "Dirty"     : "×",
-    	\ "Clean"     : "@",
-    	\ 'Ignored'   : '☒',
-    	\ "Unknown"   : "?"
-    	\ }
 
 " auto complete
 let g:UltiSnipsExpandTrigger="<S-Tab>"
@@ -196,7 +162,7 @@ let g:tsuquyomi_disable_quickfix = 1
 let g:prettier#autoformat = 0
 let g:prettier#exec_cmd_async = 1
 
-let g:tagbar_ctags_bin = '/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+" let g:tagbar_ctags_bin = '/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 let g:tagbar_jsctags_bin = '/usr/local/bin/jsctags'
 let g:tagbar_iconchars = ['+', '-']
 
@@ -220,5 +186,15 @@ let g:xml_syntax_folding = 1
 " let g:WebDevIconsUnicodeDecorateFileNodes = 1
 " let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 " let g:WebDevIconsOS = 'Darwin'
+
+" editorconfig
+let editorconfig=expand('~/.editorconfig')
+if filereadable(editorconfig)
+  let g:editorconfig_Beautifier=editorconfig
+endif
+
+" phpcd
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['omni']
 
 "========================= Plugin Config End =========================

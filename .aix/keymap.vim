@@ -61,6 +61,21 @@ function! VisualSelection(direction, extra_filter) range
 endfunction
 " -------------- Tooling Function Ending ------------------
 
+" Visual Mode 快捷键
+map vi' <Esc>?'<CR>lv/'<CR>h
+map vi" <Esc>?"<CR>lv/"<CR>h
+map va' <Esc>?'<CR>v/'<CR>
+map va" <Esc>?"<CR>v/"<CR>
+map vix <Esc>?><CR>lv/<<CR>h
+map vi= <ESC>?\s\+\S\+\s*=\s*\S\+<CR>lv/=<CR>/\S<CR>/[\s<>\n]<CR>h
+map vi/ <Esc>?\/<CR>l<Esc>v/\/<CR>h
+map vt) <ESC>v/)<CR>h
+map vt' <ESC>v/'<CR>h
+map vt" <ESC>v/"<CR>h
+map vt; <ESC>v/;<CR>h
+map vt, <ESC>v/,<CR>h
+map vt} <ESC>v/}<CR>h
+
 if(has("mac"))
   nnoremap <D-2> :NERDTreeToggle<CR>
   nnoremap <D-3> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
@@ -68,7 +83,8 @@ if(has("mac"))
   nnoremap <D-5> ggVG:RetabIndent<CR>
   nnoremap <D-6> ggVG:Tab2Space<CR>
   " Full Fucking Window ^M ending line file!
-  nnoremap <D-7> :%s////g<CR>
+  nnoremap <D-7> :%s/
+///g<CR>
 else
   nnoremap <F2> :NERDTreeToggle<CR>
   nnoremap <F3> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
@@ -76,7 +92,8 @@ else
   nnoremap <F8> ggVG:RetabIndent<CR>
   nnoremap <F9> ggVG:Tab2Space<CR>
   " Full Fucking Window ^M ending line file!
-  nnoremap <F10> :%s////g<CR>
+  nnoremap <F10> :%s/
+///g<CR>
 endif
 
 " Normal Key Map
@@ -174,7 +191,7 @@ nnoremap <C-x> :bdelete<CR>
 " Check Vim Syntax name Fn
 nnoremap <leader>yi :call <SID>SynStack()<CR>
 
-" Repeat Preview 
+" Repeat Preview
 nnoremap <leader>. @:
 vnoremap <leader>. :normal .<CR>
 

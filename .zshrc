@@ -2,12 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/pengsihao/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="terminalparty"
+# ZSH_THEME="terminalparty"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,7 +52,7 @@ ZSH_THEME="terminalparty"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmuxinator zsh-autosuggestions lighthouse bundler osx rake node yarn npm zsh-better-npm-completion)
+plugins=(git item2 tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,26 +86,37 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias mvim='/Applications/MacVim.app/Contents/MacOS/MacVim -v'
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 export REACT_EDITOR=mvim
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="/usr/local/opt/icu4c/bin:$PATH"
-export PATH="/usr/local/opt/icu4c/sbin:$PATH"
-
-# just env path
-export PATH=/Users/pengsihao/.just-installs/bin:$PATH
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="/usr/local/Cellar/ctags/5.8_1/bin:$PATH"
-export PATH="/usr/local/opt/go/libexec/bin:$PATH"
-export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/apr/bin:$PATH"
-export PATH="/usr/local/opt/apr-util/bin:$PATH"
-export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH=$HOME/.composer/vendor/bin:$HOME/devspace/common/bin:${PATH}
+export HOMEBREW_GITHUB_API_TOKEN=cfaa2cd5fed3ae4f570df63edcf2f0a29289e348
 export PAGER=vimpager
+alias vj="vim '+call VjOpen()'"
+alias grep="grep --color"
+alias gci="git commit -am"
+alias gco="git checkout"
+alias gcb="git checkout -b"
+alias zeal='/Applications/Zeal.app/Contents/MacOS/Zeal'
+alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+
+
+fg() {
+    if [[ $# -eq 1 && $1 = - ]]; then
+        builtin fg %-
+    else
+        builtin fg %"$@"
+    fi
+}
+
+bg() {
+    if [[ $# -eq 1 && $1 = - ]]; then
+        builtin bg %-
+    else
+        builtin bg %"$@"
+    fi
+}
 
 export GOROOT="/usr/local/opt/go/libexec"
 export GOPATH="$HOME/go"

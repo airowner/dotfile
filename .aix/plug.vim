@@ -6,13 +6,27 @@ filetype off
 " # Plugins Beginning
 call plug#begin('~/.vim/bundle/')
 
+for f in split(glob('$HOME/.aix/plug/*.vim'), '\n')
+  exe 'source' f
+endfor
+" Plug 'https://gameteam360@bitbucket.org/gameteam360/pylon_ide.git'
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+
+
+" 用 editorconfig 统一托管缩进格式，所以不需要对 Vim 单独配置
+Plug 'editorconfig/editorconfig-vim'
+
 " @ Plugin --- [ File Buffer Manager ]
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'unkiwii/vim-nerdtree-sync'
+
+
 Plug 'w0rp/ale'
-Plug 'yegappan/mru'
+" 最常用列表 Most Recently Used
+" Plug 'yegappan/mru'
+
+" rename[!] {newname}
 Plug 'danro/rename.vim'
+
+" 记录undo历史
 Plug 'simnalamburt/vim-mundo'
 
 " MacVim 'n use fzf
@@ -44,20 +58,25 @@ Plug 'haya14busa/is.vim'
 " Plug 'Valloric/YouCompleteMe'
 Plug 'mattn/emmet-vim'
 Plug 'SirVer/ultisnips'
-Plug 'letientai299/vim-react-snippets', { 'branch': 'es6' }
+" Plug 'letientai299/vim-react-snippets', { 'branch': 'es6' }
 Plug 'honza/vim-snippets'
+" php snippets
+Plug 'chrisyue/my-snips'
 Plug 'Shougo/vimproc', { 'do': 'make' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neco-syntax'
 " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
-if !exists("g:gui_oni")
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  " vim8兼容性不好，需要装pynvim pip3 install pynvim
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
+
 Plug 'Shougo/deol.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'zchee/deoplete-zsh'
@@ -130,8 +149,6 @@ Plug 'kana/vim-textobj-line'
 
 " @ Plugin --- [ ColorScheme ]
 
-Plug 'DemonCloud/vim-autoclose'
-
 Plug 'DemonCloud/J'
 " Plug 'morhetz/gruvbox'
 " Plug 'ayu-theme/ayu-vim'
@@ -148,8 +165,6 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 if !exists("g:gui_oni")
 " Plug 'ton/vim-bufsurf'
 Plug 'ap/vim-buftabline'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 endif
 " Plug 'ryanoasis/vim-devicons'
 

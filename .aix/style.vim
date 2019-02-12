@@ -1,6 +1,6 @@
 " @ COLOR Themes
 try
-    " colorscheme ayu
+    "colorscheme ayu
     colorscheme J
     "colorscheme monochrome
     "colorscheme seoul256
@@ -14,6 +14,7 @@ try
     "colorscheme badwolf
     "colorscheme mirodark
     "colorscheme codeschool
+    "colorscheme default
 catch
 
 endtry

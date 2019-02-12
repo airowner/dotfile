@@ -18,6 +18,7 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " behave mswin
 
 " Format
+set errorformat=%m\ in\ %f\ on\ line\ %l
 set nu
 set copyindent
 set preserveindent
@@ -31,10 +32,12 @@ set autowrite
 set display=lastline
 
 " Encoding setting
+" 文件编码
 set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,latin1
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set termencoding=utf-8
+scriptencoding utf-8
 language messages en_US.utf-8
 
 " For indent
@@ -174,9 +177,9 @@ set dictionary+=/usr/share/dict/words
 set backspace=indent,eol,start
 
 " setting the tabs like that
-" set list listchars=tab:→\ ,trail:\ 
-" set list listchars=tab:▸\ 
-"set list listchars=tab:-\ ,trail:\ 
+" set list listchars=tab:→\ ,trail:\
+" set list listchars=tab:▸\
+"set list listchars=tab:-\ ,trail:\
 " set list listchars=tab:▸\ ,extends:>,precedes:<
 set list listchars=tab:→\ ,extends:>,precedes:<
 

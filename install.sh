@@ -56,11 +56,11 @@ if [ ! -d "$HOME/.vim/autoload/" ]; then
 	mkdir $HOME/.vim/autoload/
 fi
 
+pip3 install --user pynvim
+
 echo "Clone Vim-Plug Plugin..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-echo "Clone J ColorSheme..."
-git clone https://github.com/DemonCloud/J $HOME/.vim/bundle/J
 printf "\033[33mVim-Plug has Install && Exist\033[0m\n"
 
 printf "\033[33mChecking Completed!\033[0m\n"
@@ -70,6 +70,7 @@ printf "\033[36mCopy new files to the HOME PATH...\033[0m\n"
 printf "\n"
 echo " [- $HOME/"
 echo "   |- .vimrc       [ -- Vim config -- ]"
+echo "   |- .zshrc       [ -- zshrc config -- ]"
 echo "   |- .tmux.conf   [ -- Tmux config -- ]"
 echo " -] "
 printf "\n"
@@ -77,11 +78,19 @@ printf "\n"
 # Copy file in to path
 cp -rf .aix $HOME/
 cp -f .vimrc $HOME/
+cp -f .editorconfig $HOME/
+cp -f .eslintrc.js $HOME/
+cp -f .htmlhintrc $HOME/
+
 # # support NeoVim
 # sudo cp -f sysinit.vim /usr/share/nvim/
 if [ ! -f "$HOME/.tmux.conf" ]; then
 	printf "\033[36mCopy tmux.conf!\033[0m\n"
 	cp -f .tmux.conf $HOME/
+fi
+if [ ! -f "$HOME/.zshrc" ]; then
+	printf "\033[36mCopy zshrc!\033[0m\n"
+	cp -f .zshrc $HOME/
 fi
 
 printf "\033[36mCopy Completed, Finish Install !\033[0m\n"
