@@ -27,8 +27,10 @@ set shiftwidth=2 "4
 set softtabstop=0 "4
 " set expandtab
 set noexpandtab
+set wildmenu
+set wildmode=full
 
-set autowrite
+" set autowrite
 set display=lastline
 
 " Encoding setting
@@ -69,8 +71,20 @@ set shortmess=a
 
 " No back up files
 set nobackup
-set nowritebackup
-set noswapfile
+if has("vms")
+  set nobackup
+  set nowritebackup
+  set noswapfile
+else
+  set backup
+  " 备份文件位置
+  if !filereadable(expand('$HOME/backup/vim/'))
+    silent execute ":!mkdir -p ~/backup/vim"
+  endif
+  set backupdir=$HOME/backup/vim
+  set backupext=.bak
+endif
+
 
 " Rule the define
 set noshowmode
@@ -141,7 +155,7 @@ if has("gui_running")
     " set guifont=Consolas_for_Powerline_FixedD:h10:cANSI
     set guifont=Consolas_for_Powerline_FixedD:h10:cANSI
   elseif(has('osx'))
-    set guifont=Aix:h14
+    set guifont=Monaco:h18
     " set guifont=PragmataPro:h12
   else
     set guifont=Aix\ 9
@@ -149,7 +163,7 @@ if has("gui_running")
 
   map <silent> <F1> :if &guioptions =~# 'T' <Bar>
         \set guioptions-=T <Bar>
-        \set guioptions-=m <bar>
+        \set guioptions-=m <Bar>
         \else <Bar>
         \set guioptions+=T <Bar>
         \set guioptions+=m <Bar>
@@ -186,4 +200,7 @@ set list listchars=tab:→\ ,extends:>,precedes:<
 au BufNewFile,BufRead *.vue set ft=html
 au BufNewFile,BufRead *.ax,*.handlebar,*.mustache,*.tpl set ft=mustache
 au BufNewFile,BufRead *.vm,*.stm set ft=velocity
+" nginx path syntax highlight
+au BufNewFile,BufRead /etc/nginx/*,/usr/local/nginx/*,/usr/local/etc/openresty/conf.d/*,nginx.conf set ft=nginx | syntax on
+au BufRead,FileReadPost *.inc,*.php,*.js,*.css,*.html %s/\r/\r/ge
 " ========================= Normal Setting End =========================

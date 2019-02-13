@@ -7,14 +7,14 @@ let g:ale_sign_warning = '*'
 " This can be useful if you are combining ALE with
 " some other plugin which sets quickfix errors, etc.
 let g:ale_linters = {
-			\   'javascript': ['eslint'],
-			\   'html': ['htmlhint'],
-			\   'css': ['stylelint'],
-			\   'md': ['mdl'],
-			\   'markdown': ['mdl'],
-			\   'sass' : ['scss_lint'],
-			\   'scss' : ['scss_lint'],
-			\}
+      \   'javascript': ['eslint'],
+      \   'html': ['htmlhint'],
+      \   'css': ['stylelint'],
+      \   'md': ['mdl'],
+      \   'markdown': ['mdl'],
+      \   'sass' : ['scss_lint'],
+      \   'scss' : ['scss_lint'],
+      \}
 " set termguicolors
 let ayucolor="dark"   " for dark version of theme
 " let ayucolor="light"  " for light version of theme
@@ -94,8 +94,9 @@ let g:user_emmet_settings = {
 let g:gitgutter_sign_column_always = 0
 let g:gitgutter_max_signs = 99999
 
+
 " Ag.vim Settings
-let g:ackprg = "ag --nocolor --nogroup --column"
+let g:ag_prg="ag --nocolor --nogroup --skip-vcs-ignores  --smart-case --ignore-dir={_prj,node_modules,tmp}  --column"
 set grepprg=ag\ --nogroup\ --nocolor
 if(!has('nvim'))
   command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!

@@ -76,30 +76,12 @@ map vt; <ESC>v/;<CR>h
 map vt, <ESC>v/,<CR>h
 map vt} <ESC>v/}<CR>h
 
-if(has("mac"))
-  nnoremap <D-2> :NERDTreeToggle<CR>
-  nnoremap <D-3> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
-  nnoremap <D-4> mzgg=G`z
-  nnoremap <D-5> ggVG:RetabIndent<CR>
-  nnoremap <D-6> ggVG:Tab2Space<CR>
-  " Full Fucking Window ^M ending line file!
-  nnoremap <D-7> :%s/
-///g<CR>
-else
-  nnoremap <F2> :NERDTreeToggle<CR>
-  nnoremap <F3> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
-  nnoremap <F4> mzgg=G`z
-  nnoremap <F8> ggVG:RetabIndent<CR>
-  nnoremap <F9> ggVG:Tab2Space<CR>
-  " Full Fucking Window ^M ending line file!
-  nnoremap <F10> :%s/
-///g<CR>
-endif
-
-" Normal Key Map
-nnoremap U :redo<CR>
-nnoremap Q :q!<CR>
-nnoremap W :w!<CR>
+nnoremap <silent><F2>    : NERDTreeTabsToggle<CR>
+nnoremap <silent><F4>    mzgg=G`zmz
+nnoremap <silent><F5>    : NERDTreeRefreshRoot<CR>
+nnoremap <silent><F7>    : TagbarToggle<CR>
+nnoremap <silent><F8>    ggVG:RetabIndent<CR>
+nnoremap <silent><F9>    ggVG:Tab2Space<CR>
 
 " Window VertSplit switcher
 nnoremap <leader>h <C-w>h
@@ -126,13 +108,16 @@ nnoremap <silent> g, g,zz
 " Smooth Scroll the terminal
 " nnoremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 " nnoremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
-nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<CR>
-nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<CR>
-
-noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
-noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
+" nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
+" nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
+"
+"
+" nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<CR>
+"
+" nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<CR>
+"
+" noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+" noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 
 if(has('mac'))
   cnoremap <A-j> <Down>
@@ -210,10 +195,6 @@ vnoremap <leader>d "+d
 nnoremap <leader>cd :cd %:p:h<CR>
 nnoremap <leader>cp :let @+=expand("%:p")<CR>:echo "Copied current file
       \ path '".expand("%:p")."' to clipboard"<CR>
-
-" Vundle keyfire
-nnoremap <leader>vi :PlugInstall<CR>
-nnoremap <leader>vu :PlugUpdate<CR>
 
 " Tabluer Format
 vnoremap <leader>t :Tabularize/

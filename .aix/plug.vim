@@ -9,12 +9,57 @@ call plug#begin('~/.vim/bundle/')
 for f in split(glob('$HOME/.aix/plug/*.vim'), '\n')
   exe 'source' f
 endfor
+
 " Plug 'https://gameteam360@bitbucket.org/gameteam360/pylon_ide.git'
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 
 
 " 用 editorconfig 统一托管缩进格式，所以不需要对 Vim 单独配置
 Plug 'editorconfig/editorconfig-vim'
+
+" comment
+Plug 'tomtom/tcomment_vim'
+" tcommment_vim
+" 代码注释
+noremap  <Leader>x :TComment<CR>
+noremap  <Leader>X :TCommentRight<CR>
+xnoremap <Leader>x :TCommentMaybeInline<CR>
+noremap  <Leader>C :TCommentMaybeInline<CR>
+noremap  <Leader>c :TCommentBlock<CR>
+xnoremap <Leader>c :TCommentBlock<CR>
+
+Plug 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/DoxygenToolkit.vim'
+" DoxygenToolkit.vim
+" 生成Doxygen风格的文档注释
+noremap <Leader>dc <Esc>:Dox<CR>
+noremap <Leader>da <Esc>:DoxAuthor<CR>
+" noremap <Leader>dd <Esc>:DoxUndoc<CR>
+
+"snipmate + snippets
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+" php snippets
+Plug 'chrisyue/my-snips'
+" python snippets
+" Plug 'SirVer/ultisnips'
+" react snippets
+" Plug 'letientai299/vim-react-snippets', { 'branch': 'es6' }
+
+Plug 'ervandew/supertab'
+" 避免和supertab冲突
+let g:SuperTabDefaultCompletionType = "context"
+" 自动补全引号，括号等
+Plug 'ervandew/matchem'
+
+
+" Align
+Plug 'junegunn/vim-easy-align'
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " @ Plugin --- [ File Buffer Manager ]
 
@@ -44,7 +89,6 @@ Plug 'rhysd/clever-f.vim'
 
 " @ Plugin --- [ View ]
 " Plug 'terryma/vim-smooth-scroll'
-Plug 'yuttie/comfortable-motion.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
 Plug 'kana/vim-operator-user'
@@ -57,11 +101,6 @@ Plug 'haya14busa/is.vim'
 " @ Plugin --- [ Code Complete Unity ]
 " Plug 'Valloric/YouCompleteMe'
 Plug 'mattn/emmet-vim'
-Plug 'SirVer/ultisnips'
-" Plug 'letientai299/vim-react-snippets', { 'branch': 'es6' }
-Plug 'honza/vim-snippets'
-" php snippets
-Plug 'chrisyue/my-snips'
 Plug 'Shougo/vimproc', { 'do': 'make' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-vim'
@@ -90,7 +129,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
-" Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 
 " Git all famliy
 " For SVN status
@@ -100,7 +139,8 @@ Plug 'chrisbra/vim-diff-enhanced'
 " Plug 'chrisbra/changesPlugin'
 
 " @ Plugin --- [ Syntax ]
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'chr4/nginx.vim'
 Plug 'kh3phr3n/python-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'groenewege/vim-less'

@@ -1,7 +1,7 @@
 " @ COLOR Themes
 try
     "colorscheme ayu
-    colorscheme J
+    "colorscheme J
     "colorscheme monochrome
     "colorscheme seoul256
     "colorscheme distinguished
@@ -14,7 +14,7 @@ try
     "colorscheme badwolf
     "colorscheme mirodark
     "colorscheme codeschool
-    "colorscheme default
+    colorscheme default
 catch
 
 endtry
