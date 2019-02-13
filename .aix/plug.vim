@@ -43,9 +43,9 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 " php snippets
-Plug 'chrisyue/my-snips'
+Plug 'chrisyue/my-snips', { 'for': 'php' }
 " python snippets
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips', { 'for': 'python' }
 " react snippets
 " Plug 'letientai299/vim-react-snippets', { 'branch': 'es6' }
 
@@ -60,8 +60,6 @@ Plug 'ervandew/matchem'
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-
-" @ Plugin --- [ File Buffer Manager ]
 
 
 Plug 'w0rp/ale'
@@ -139,10 +137,10 @@ Plug 'chrisbra/vim-diff-enhanced'
 " Plug 'chrisbra/changesPlugin'
 
 " @ Plugin --- [ Syntax ]
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'chr4/nginx.vim'
-Plug 'kh3phr3n/python-syntax'
-Plug 'pangloss/vim-javascript'
+Plug 'kh3phr3n/python-syntax', { 'for': 'python' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'groenewege/vim-less'
 Plug 'lepture/vim-velocity'
 Plug 'cakebaker/scss-syntax.vim'

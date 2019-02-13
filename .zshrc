@@ -95,13 +95,15 @@ export REACT_EDITOR=mvim
 export PATH=$HOME/.composer/vendor/bin:$HOME/devspace/common/bin:${PATH}
 export HOMEBREW_GITHUB_API_TOKEN=cfaa2cd5fed3ae4f570df63edcf2f0a29289e348
 export PAGER=vimpager
-alias vj="vim '+call VjOpen()'"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+alias vj="vim +NERDTree"
 alias grep="grep --color"
 alias gci="git commit -am"
 alias gco="git checkout"
 alias gcb="git checkout -b"
 alias zeal='/Applications/Zeal.app/Contents/MacOS/Zeal'
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
 
 fg() {

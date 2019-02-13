@@ -10,6 +10,11 @@ hash git 2>/dev/null || { echo >&2 "Require Git is not installed! Please install
 git --version
 printf "\033[36mChecking Git Completed!\033[0m\n"
 
+printf "\033[36mChecking jq install...\033[0m\n"
+hash jq 2>/dev/null || { echo >&2 "Require jq is not installed! Please install jq before you prefix config aix"; exit 1; }
+jq --version
+printf "\033[36mChecking jq Completed!\033[0m\n"
+
 printf "\033[36mChecking ag install...\033[0m\n"
 hash ag 2>/dev/null || { echo >&2 "Require ag is not installed! Please install the_silver_searcher before you prefix config aix"; exit 1; }
 ag --version
