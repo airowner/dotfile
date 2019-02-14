@@ -15,5 +15,5 @@ let g:NERDTreeRespectWildIgnore=1
 let g:NERDTreeDirArrows = 0
 " 隐藏帮助说明和书签
 let NERDTreeMinimalUI = 1
-" let g:NERDTreeDirArrowExpandable = '+'
-" let g:NERDTreeDirArrowCollapsible = '-'
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'

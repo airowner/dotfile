@@ -188,8 +188,17 @@ Plug 'kana/vim-textobj-line'
 " @ Plugin --- [ ColorScheme ]
 
 Plug 'DemonCloud/J'
-" Plug 'morhetz/gruvbox'
-" Plug 'ayu-theme/ayu-vim'
+Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
+Plug 'coocon/vim-yytextmate-theme'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'altercation/solarized'
+Plug 'davidklsn/vim-sialoquent'
+Plug 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
+Plug 'cormacrelf/vim-colors-github'
+Plug 'junegunn/seoul256.vim'
+Plug 'aereal/vim-colors-japanesque'
 
 " Plug 'gregsexton/gitv'
 " Plug 'bagrat/vim-workspace'
@@ -215,4 +224,7 @@ syntax enable
 filetype on
 filetype plugin on
 filetype plugin indent on
+if has('gui')
+  set transparency=4
+endif
 " ========================= Plug Setup End =========================
