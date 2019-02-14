@@ -109,6 +109,7 @@ alias gcb="git checkout -b"
 alias zeal='/Applications/Zeal.app/Contents/MacOS/Zeal'
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+alias gvim="/Applications/MacVim.app/Contents/bin/gvim"
 
 
 fg() {

@@ -144,6 +144,9 @@ if has("gui_running")
   set go=
   set guitablabel=
   set paste
+  " set lines=40 columns=140
+  set lines=999
+  set columns=999
   " set mousemodel=popup_setpos
   " set mouse-=a
   "set guitablabel=%M\ %t
@@ -169,7 +172,6 @@ if has("gui_running")
         \set guioptions+=m <Bar>
         \endif<CR>
 else
-  set t_Co=256
   set showtabline=2
   set noimd
   set ttimeoutlen=0
