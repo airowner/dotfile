@@ -96,11 +96,31 @@ let g:gitgutter_max_signs = 99999
 
 
 " Ag.vim Settings
-let g:ag_prg="ag --nocolor --nogroup --skip-vcs-ignores  --smart-case --ignore-dir={_prj,node_modules,tmp}  --column"
-set grepprg=ag\ --nogroup\ --nocolor
-if(!has('nvim'))
-  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+" let g:ag_prg="ag --nocolor --nogroup --skip-vcs-ignores --smart-case --ignore-dir={_prj,node_modules,tmp,vendor/composer} --column"
+" if(!has('nvim'))
+"   command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+" endif
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --nocolor --nogroup -U --ignore-dir={_prj,node_modules,tmp,vendor/composer} --column'
 endif
+
+"Far.vim Mutilp Replace
+let g:far#source = 'ag'
+let g:far#auto_preview = 1
+
+" " ag is fast enough that CtrlP doesn't need to cache
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+set grepprg=ag\ --nogroup\ --nocolor
+let g:ctrlp_user_command = 'ag %s -l --nocolor -U -g "" --ignore-dir={_prj,node_modules,tmp,vendor/composer}'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+let g:xml_syntax_folding = 1
 
 " Multip Cursor
 " Default mapping
@@ -166,17 +186,6 @@ let g:prettier#exec_cmd_async = 1
 " let g:tagbar_ctags_bin = '/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 let g:tagbar_jsctags_bin = '/usr/local/bin/jsctags'
 let g:tagbar_iconchars = ['+', '-']
-
-"Far.vim Mutilp Replace
-let g:far#source = 'ag'
-let g:far#auto_preview = 0
-
-" " ag is fast enough that CtrlP doesn't need to cache
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-set grepprg=ag\ --nogroup\ --nocolor
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-let g:ctrlp_use_caching = 0
-let g:xml_syntax_folding = 1
 
 " webdevicons
 " let g:webdevicons_enable = 1

@@ -11,6 +11,7 @@ for f in split(glob('$HOME/.aix/plug/*.vim'), '\n')
 endfor
 
 " Plug 'https://gameteam360@bitbucket.org/gameteam360/pylon_ide.git'
+" php you complete me!!
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 
 
@@ -78,10 +79,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
 Plug 'tweekmonster/fzf-filemru'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
+" 搜索函数，CtrlPFunky 貌似有了tagbar就不需要这个函数搜索了
+" Plug 'tacahiroy/ctrlp-funky'
 
 " @ Plugin --- [ Code Sreach ]
-Plug 'rking/ag.vim'
+" ag.vim 已经停止维护，并且ack可以支持修改为其它搜索工具
+" Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
 Plug 'rhysd/clever-f.vim'
 
@@ -98,7 +102,7 @@ Plug 'haya14busa/is.vim'
 
 " @ Plugin --- [ Code Complete Unity ]
 " Plug 'Valloric/YouCompleteMe'
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'Shougo/vimproc', { 'do': 'make' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-vim'
@@ -174,7 +178,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'arecarn/vim-fold-cycle'
+" Plug 'arecarn/vim-fold-cycle'
 Plug 'pseewald/vim-anyfold'
 Plug 'ConradIrwin/vim-bracketed-paste'
 " Plug 'kopischke/vim-stay'
