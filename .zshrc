@@ -101,6 +101,7 @@ export PATH=$HOME/.composer/vendor/bin:$HOME/devspace/common/bin:${PATH}
 export HOMEBREW_GITHUB_API_TOKEN=cfaa2cd5fed3ae4f570df63edcf2f0a29289e348
 # export PAGER=vimpager
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+eval "$(nodenv init -)"
 alias vj="vim +NERDTree"
 alias grep="grep --color"
 alias gci="git commit -am"

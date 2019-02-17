@@ -1,9 +1,9 @@
 " ========================= Normal Setting Start =========================
-"Set windows pos and resize init
-if(has('gui'))
-  set lines=38
-  set columns=80
-endif
+" Set windows pos and resize init
+" if(has('gui'))
+"   set lines=38
+"   set columns=80
+" endif
 
 let g:python2_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -115,7 +115,7 @@ set t_vb=
 set foldmethod=indent
 set foldnestmax=10
 set foldenable
-set nofoldenable
+" set nofoldenable
 set foldlevel=2
 
 " misc settings

@@ -93,8 +93,9 @@ printf "\n"
 
 rm -f $HOME/.zshrc
 rm -f $HOME/.vimrc
+rm -f $HOME/.aix
 
-# Copy file in to path
+# link file in to path
 ln -sf `pwd`/.aix $HOME/.aix
 ln -sf `pwd`/.tmux.conf $HOME/.tmux.conf
 ln -sf `pwd`/.zshrc $HOME/.zshrc

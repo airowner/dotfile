@@ -6,6 +6,23 @@ let g:ale_sign_warning = '*'
 " Set this if you want to.
 " This can be useful if you are combining ALE with
 " some other plugin which sets quickfix errors, etc.
+"
+" ale fix
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'php': ['php_cs_fixer'],
+\}
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+
+" ale linter
+" Write this in your vimrc file
+let g:ale_lint_on_text_changed = 'never'
+" You can disable this option too
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
 let g:ale_linters = {
       \   'javascript': ['eslint'],
       \   'html': ['htmlhint'],
@@ -14,7 +31,10 @@ let g:ale_linters = {
       \   'markdown': ['mdl'],
       \   'sass' : ['scss_lint'],
       \   'scss' : ['scss_lint'],
+      \   'php': ['phpcbf'],
       \}
+
+
 " set termguicolors
 let ayucolor="dark"   " for dark version of theme
 " let ayucolor="light"  " for light version of theme

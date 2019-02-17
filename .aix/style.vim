@@ -27,7 +27,7 @@ try
     else
       if $COLORTERM == 'truecolor'
         set termguicolors
-        colorscheme janpanesque
+        colorscheme japanesque
       else
         let g:solarized_termtrans = 1
         set term=xterm
