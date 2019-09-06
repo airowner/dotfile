@@ -54,9 +54,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  item2
   tmuxinator
-  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -99,6 +97,8 @@ export EDITOR=vim
 # export REACT_EDITOR=mvim
 export PATH=$HOME/.composer/vendor/bin:$HOME/devspace/common/bin:${PATH}
 export HOMEBREW_GITHUB_API_TOKEN=cfaa2cd5fed3ae4f570df63edcf2f0a29289e348
+export COMPOSER_AUTH='{"github-oauth": {"github.com": "666386a0252be15ed1249797a1e89cbca94c621e"}}'
+
 # export PAGER=vimpager
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 eval "$(nodenv init -)"
@@ -107,6 +107,7 @@ alias grep="grep --color"
 alias gci="git commit -am"
 alias gco="git checkout"
 alias gcb="git checkout -b"
+alias gdiff="git diff -b -w --ignore-blank-lines --ignore-cr-at-eol --ignore-space-at-eol"
 alias zeal='/Applications/Zeal.app/Contents/MacOS/Zeal'
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
@@ -139,3 +140,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/local/opt/zsh-git-prompt/zshrc.sh
 source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
