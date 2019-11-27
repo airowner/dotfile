@@ -1,0 +1,35 @@
+#!/bin/bash
+
+ONLINE_PATH=$1
+PROJECT=$2
+HOST=$3
+AWK=`which awk`
+
+if [ "$HOST" = "" ]; then
+    echo "please set online host in .ssh/config or user@ip"
+    exit
+fi
+
+root_path=$(cd "$(dirname "$0")";pwd)
+
+link=`ssh $HOST "readlink $ONLINE_PATH/$PROJECT"`
+if [ "$link" = "" ];then
+    echo "patch project $PROJECT do not find"
+    exit
+fi
+online_branch=`echo $(basename $link) | $AWK -F '-' '{print($2)}'`
+online_version=`echo $(basename $link) | $AWK -F '-' '{print($3)}'`
+
+#当前版本
+branch=`git branch -a | grep \* | cut -c 3-`
+version=`git log --pretty=oneline | head -n 1 | $AWK '{print $1}' | cut -c 1-10`
+#获取版本
+project_name=$PROJECT-$branch-$version
+
+git diff $online_version HEAD > ./$PROJECT-$online_version-$version.patch
+gzip -9 ./$PROJECT-$online_version-$version.patch
+
+scp ./$PROJECT-$online_version-$version.patch.gz $HOST:/opt/source/
+ssh $HOST "source $ONLINE_PATH/common/bin/pub; patch_project $ONLINE_PATH $PROJECT $PROJECT-$online_version-$version"
+rm -f ./$PROJECT-$online_version-$version.patch.gz
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+kill `cat /var/run/php-fpm.pid`
+`which php-fpm`

@@ -96,6 +96,7 @@ rm -f $HOME/.vimrc
 rm -f $HOME/.aix
 
 # link file in to path
+ln -sf `pwd`/bin $HOME/.bin
 ln -sf `pwd`/.aix $HOME/.aix
 ln -sf `pwd`/.tmux.conf $HOME/.tmux.conf
 ln -sf `pwd`/.zshrc $HOME/.zshrc

@@ -1,0 +1,18 @@
+#!/usr/bin/env expect
+
+set host [lrange $argv 0 0]
+
+spawn ssh $host
+
+expect {
+	-re ".*Are.*.*yes.*no.*" {
+		send "yes\n"
+		exp_continue
+	}
+
+	"*assword:" {
+		send -- "$pass\n"
+	}
+}
+
+interact;

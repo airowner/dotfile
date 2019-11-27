@@ -1,0 +1,253 @@
+#!/bin/bash
+
+source `dirname $BASH_SOURCE`/common
+
+nginx_path=`which nginx`
+ps_path=`which ps`
+
+echo -ne $WHITE
+
+function deployed
+{
+    good $1 || "deployed OK!"
+    exit 0
+}
+
+function deployedError
+{
+    bad "deployed ERROR! $1"
+    exit 0
+}
+
+function good()
+{
+    green $@
+}
+
+function bad()
+{
+    red $@
+}
+
+function gob()
+{
+    if [ "$?" = "0" ]; then
+        good "$1 OK"
+    else
+        bad "$2 ERROR"
+    fi
+}
+
+function reloadnginx()
+{
+    if [ "$1" = "y" -o "$1" = "Y" ]; then
+        echo "check nginx configure ..."
+        $nginx_path -t
+        local ok=$?
+        sleep 1
+        if [ "$ok" = "0" ];then
+            echo "reload nginx ..."
+            $nginx_path -s reload
+            gob "reload nginx"
+        fi
+    fi
+}
+
+function reloadphp()
+{
+    if [ "$1" = "y" -o "$1" = "Y" ]; then
+        fpm_pid=`$ps_path ax | grep php-fpm | grep master | awk '{print $1}'`
+        echo "reload php-fpm ..."
+        kill -USR2 $fpm_pid
+        gob "reload php-fpm"
+    fi
+}
+
+function prefix_chioce()
+{
+    nary=( $@ )
+    local p
+    local i=1
+    for p in ${nary[@]}; do
+        echo [$i] $p
+        i=$(($i + 1))
+    done
+}
+
+function post_chioce()
+{
+    local return_value=$1
+    local chioce_num=$2
+    i=$[ $chioce_num - 1 ]
+    eval $return_value="${nary[$i]}||''"
+}
+
+#ONLINE_PATH PROJECT #prefix_name of tar.gz
+function publish_project()
+{
+    local ONLINE_PATH=$1
+    local PROJECT=$2
+    local project_name=$3
+
+    mkdir -p /opt/source
+    cd $ONLINE_PATH
+    tar zxf /opt/source/$project_name.tar.gz
+    chown -R root:root $project_name
+
+    #自定义发布
+    if [ -x $ONLINE_PATH/$project_name/_prj/deploy.sh ];then
+        $ONLINE_PATH/$project_name/_prj/deploy.sh
+        if [ "$?" != "0" ];then
+            deployedError "project depoly script error.";
+        fi
+        good "deploy project deploy script"
+    fi
+
+    #link web source
+    rm -f $ONLINE_PATH/$PROJECT
+    ln -s $ONLINE_PATH/$project_name $ONLINE_PATH/$PROJECT
+
+    if [ -f $ONLINE_PATH/$project_name/_prj/nginx.conf ];then
+        rm -f /etc/nginx/conf.d/$PROJECT.conf
+        ln -s $ONLINE_PATH/$project_name/_prj/nginx.conf /etc/nginx/conf.d/$PROJECT.conf
+    fi
+
+    #重启nginx
+    reloadnginx y
+
+    echo "need reload php-fpm?[y/N]: "
+    read
+    reloadphp $REPLY
+
+}
+
+function clear_project()
+{
+    local ONLINE_PATH=$1
+    local PROJECT=$2
+    #clear oldest project
+    old_online=( `ls -dt $ONLINE_PATH/$PROJECT-*` )
+    num=0
+    for p in ${old_online[@]}; do
+        num=$(( $num + 1 ))
+        if [ $num -le 3 ];then
+            continue
+        else
+            rm -rf $p
+        fi
+    done
+
+    #clear oldest project tar
+    old_online=( `ls -dt /opt/source/$PROJECT-*.tar.gz` )
+    num=0
+    for p in ${old_online[@]}; do
+        num=$(( $num + 1 ))
+        if [ $num -le 3 ];then
+            continue
+        else
+            rm -f $p
+        fi
+    done
+
+    #pub 整个项目后删除此项目所有的patch
+    rm -f /opt/source/$PROJECT-*.patch
+}
+
+function patch_project()
+{
+    local ONLINE_PATH=$1
+    local PROJECT=$2
+    local project_name=$3 #$PROJECT-$online_version-$version
+    local patch=`which patch`
+    local awk=`which awk`
+
+    mkdir -p /opt/source
+    if [ ! -f /opt/source/$project_name.patch.gz ];then
+        deployedError "patch file $project_name.patch.gz do not exists!"
+    fi
+
+    if [ ! -d $ONLINE_PATH/$PROJECT ];then
+        deployedError "project $PROJECT do not exists!"
+    fi
+
+    local link=$(readlink $ONLINE_PATH/$PROJECT)
+    local version=`echo $(basename $link) | $awk -F '-' '{print($3)}'`
+
+    cd /opt/source
+
+    old_patch_file=`ls -1t $PROJECT-$version-*.patch 2>/dev/null | head -n 1`
+
+    gunzip $project_name.patch.gz
+    if [ "$?" != "0" ];then
+        deployedError "gunzip patch file $project_name.patch.gz error!"
+    fi
+
+    if [ ! -f $project_name.patch ];then
+        deployedError "patch file $project_name.patch do not exists!"
+    fi
+
+    cd $ONLINE_PATH/$PROJECT
+    if [ "$old_patch_file" != "" -a -f /opt/source/$old_patch_file ]; then
+        echo "unpatch old patch file /opt/source/$old_patch_file ..."
+        $patch -R -p1 < /opt/source/$old_patch_file
+    fi
+    echo "patch new patch file /opt/source/$project_name.patch ..."
+    $patch -p1 < /opt/source/$project_name.patch
+
+    cd $ONLINE_PATH
+
+    #自定义发布
+    if [ -x $ONLINE_PATH/$PROJECT/_prj/deploy.sh ];then
+        $ONLINE_PATH/$PROJECT/_prj/deploy.sh
+        if [ "$?" != "0" ];then
+            deployedError "project depoly script error.";
+        fi
+        good "deploy project deploy script"
+    fi
+
+    #重启nginx
+    reloadnginx y
+
+    echo "need reload php-fpm?[y/N]: "
+    read
+    reloadphp $REPLY
+
+    echo "需要回滚?[y/N]: "
+    read
+    if [ "$REPLY" = 'y' -o "$REPLY" = 'Y' ];then
+        cd $ONLINE_PATH/$PROJECT
+        echo "unpatch new patch file /opt/source/$project_name.patch ..."
+        $patch -R -p1 < /opt/source/$project_name.patch
+
+        if [ "$old_patch_file" != "" -a -f /opt/source/$old_patch_file ]; then
+            echo "patch old patch file /opt/source/$old_patch_file ..."
+            $patch -p1 < /opt/source/$old_patch_file
+        fi
+
+        cd $ONLINE_PATH
+        #自定义发布
+        if [ -x $ONLINE_PATH/$PROJECT/_prj/deploy.sh ];then
+            $ONLINE_PATH/$PROJECT/_prj/deploy.sh
+            if [ "$?" != "0" ];then
+                deployedError "project depoly script error.";
+            fi
+            good "deploy project deploy script"
+        fi
+
+
+        #重启nginx
+        reloadnginx y
+
+        echo "need reload php-fpm?[y/N]: "
+        read
+        reloadphp $REPLY
+
+        rm -f /opt/source/$project_name.patch
+        deployed "patch rollback OK"
+    fi
+
+    if [ "$old_patch_file" != "" -a -f /opt/source/$old_patch_file ]; then
+        rm -f /opt/source/$old_patch_file
+    fi
+    deployed "patch OK"
+}

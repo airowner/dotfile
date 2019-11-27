@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source `dirname $0`/common
+
+#eval_blank yellow Syntax Checking...
+#result=`find . -name '*.php' -exec php -l {} \; 2>&1 | grep -v 'No syntax errors'`
+#if [ "$result" != "" ];then
+#	echo $result
+#	red checking FAILED.
+#	exit 0;
+#fi
+#green checking OK.
+
+eval_blank yellow git commiting...
+branch=`git branch | grep -E '^\* ' | cut -c 3-`
+src=`git remote -v | grep push | awk '{print $1}'`
+if [ "$src" != "" -o "$branch" != "" ];then
+	green git push $src $branch
+	git push $src $branch
+else
+	red gpush error.
+fi

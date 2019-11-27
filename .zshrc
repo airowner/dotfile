@@ -95,12 +95,12 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 # export REACT_EDITOR=mvim
-export PATH=$HOME/.composer/vendor/bin:$HOME/devspace/common/bin:${PATH}
+export PATH=$HOME/.composer/vendor/bin:$HOME/.bin:${PATH}
 export HOMEBREW_GITHUB_API_TOKEN=cfaa2cd5fed3ae4f570df63edcf2f0a29289e348
 export COMPOSER_AUTH='{"github-oauth": {"github.com": "666386a0252be15ed1249797a1e89cbca94c621e"}}'
 
 # export PAGER=vimpager
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+#eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 eval "$(nodenv init -)"
 alias vj="vim +NERDTree"
 alias grep="grep --color"
@@ -130,10 +130,11 @@ bg() {
     fi
 }
 
-export GOROOT="/usr/local/opt/go/libexec"
-export GOPATH="$HOME/go"
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$GOPATH/bin:$PATH"
+export EBOOK_PATH=/Applications/calibre.app/Contents/MacOS
+#export GOROOT="/usr/local/opt/go/libexec"
+#export GOPATH="$HOME/go"
+#export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:$EBOOK_PATH"
+#export PATH="/usr/local/opt/qt/bin:$PATH"
 
 # export PATH="/usr/local/opt/node@6/bin:$PATH"
 fpath=(/usr/local/share/zsh-completions $fpath)
@@ -142,4 +143,3 @@ source /usr/local/opt/zsh-git-prompt/zshrc.sh
 source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-

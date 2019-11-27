@@ -1,0 +1,34 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "$0"  )" && pwd  )"
+source $DIR/pub
+
+ONLINE_PATH=$1
+PROJECT=$2
+project_name=$3
+
+if [ "$ONLINE_PATH" = "" -o "$PROJECT" = "" -o "$project_name" = "" ];then
+    echo "deploy online params error!"
+    exit
+fi
+
+old_online_targz=`find /opt/source -name "$PROJECT-*.tar.gz" | grep -v grep | grep -v $project_name.tar.gz | xargs ls -t | head -n 1`
+if [ "$old_online_targz" = "" ]; then
+    deployed
+fi
+
+#rollback
+echo "rollback?[y/N]: "
+read
+if [ "$REPLY" = "y" -o "$REPLY" = "Y" ]; then
+    old_project_name=`echo $(basename $old_online_targz) | awk -F '.' '{print $1}'`
+    publish_project $ONLINE_PATH $PROJECT $old_project_name
+
+    deployed "clear error path $ONLINE_PATH/$project_name"
+    rm -rf $ONLINE_PATH/$project_name
+    rm -f /opt/source/$project_name.tar.gz
+
+    deployed "rollback $old_path OK!"
+fi
+
+clear_project $ONLINE_PATH $PROJECT

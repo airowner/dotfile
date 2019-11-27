@@ -1,0 +1,9 @@
+#!/bin/bash
+
+HTTP_PROXY='http://127.0.0.1:1087'
+HTTPS_PROXY='http://127.0.0.1:1087'
+
+composer $@
+
+HTTP_PROXY=
+HTTPS_PROXY=
