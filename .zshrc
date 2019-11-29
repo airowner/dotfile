@@ -131,9 +131,9 @@ bg() {
 }
 
 export EBOOK_PATH=/Applications/calibre.app/Contents/MacOS
-#export GOROOT="/usr/local/opt/go/libexec"
-#export GOPATH="$HOME/go"
-#export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:$EBOOK_PATH"
+export GOROOT="/usr/local/opt/go/libexec"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:$EBOOK_PATH"
 #export PATH="/usr/local/opt/qt/bin:$PATH"
 
 # export PATH="/usr/local/opt/node@6/bin:$PATH"

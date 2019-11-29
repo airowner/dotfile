@@ -2,6 +2,32 @@
 
 # install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew tap homebrew/cask
+brew tap homebrew/services
+brew tap openresty/brew
+brew tap dart-lang/dart
+
+# zshell needed
+brew install zsh-completions \
+zsh-git-prompt \
+zsh-navigation-tools \
+zsh-syntax-highlighting \
+ctags \
+fzf \
+jq \
+ag \
+
+# oh my zsh
+if [ ! -d $HOME/.oh-my-zsh ]; then
+	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+fi
+
+# change shell
+chpass -s /bin/zsh
+
+# install shell env
+$(cd $(dirname $0); pwd)/install.sh
+
 
 # install base softwares
 brew install \
@@ -18,25 +44,19 @@ gcc \
 gd \
 geoip \
 gettext \
-icu4c \
-igbinary \
 imagemagick \
 graphicsmagick \
 jemalloc \
 mcrypt \
 openssl \
-pkg-config
-readline
-zlib
-woff2
-pcre \
+pkg-config \
+readline \
+zlib \
+woff2 \
 
 # install shell softwares
 brew install \
 hicolor-icon-theme \
-zsh-git-prompt \
-zsh-navigation-tools \
-zsh-syntax-highlighting \
 tmux \
 tree \
 enca \
@@ -45,6 +65,7 @@ dos2unix \
 # install common used softwares
 brew install redis \
 stunnel \
+privoxy \
 wget \
 telnet \
 vim \
@@ -57,14 +78,10 @@ mycli \
 mysql \
 mysql@5.7 \
 ntfs-3g \
-jq \
-ag \
-git \
 
 # install web softwares
 brew install caddy \
 openresty \
-openresty-openssl \
 
 # install php softwares
 brew install php \

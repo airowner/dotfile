@@ -105,6 +105,11 @@ ln -sf `pwd`/.editorconfig $HOME/.editorconfig
 ln -sf `pwd`/.eslintrc.js $HOME/.eslintrc.js
 ln -sf `pwd`/.htmlhintrc $HOME/.htmlhintrc
 
+# oh my zsh
+if [ ! -d $HOME/.oh-my-zsh ]; then
+	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+fi
+
 # # support NeoVim
 # sudo cp -f sysinit.vim /usr/share/nvim/
 
