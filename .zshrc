@@ -97,7 +97,7 @@ export EDITOR=vim
 # export REACT_EDITOR=mvim
 export PATH=$HOME/.composer/vendor/bin:$HOME/.bin:${PATH}
 export HOMEBREW_GITHUB_API_TOKEN=cfaa2cd5fed3ae4f570df63edcf2f0a29289e348
-export COMPOSER_AUTH='{"github-oauth": {"github.com": "666386a0252be15ed1249797a1e89cbca94c621e"}}'
+export COMPOSER_AUTH='{"github-oauth": {"github.com": "cfaa2cd5fed3ae4f570df63edcf2f0a29289e348"}}'
 
 # export PAGER=vimpager
 #eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"

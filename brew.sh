@@ -92,8 +92,8 @@ composer \
 
 # install nodejs softwares
 brew install node \
-node-build \
 nodenv \
+yarn \
 
 # install python softwares
 brew install python \
