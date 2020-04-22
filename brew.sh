@@ -95,6 +95,9 @@ brew install node \
 nodenv \
 yarn \
 
+npm install -g npm-check-updates \
+@vue/cli
+
 # install python softwares
 brew install python \
 python3
