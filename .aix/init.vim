@@ -206,3 +206,4 @@ au BufNewFile,BufRead *.vm,*.stm set ft=velocity
 au BufNewFile,BufRead /etc/nginx/*,/usr/local/nginx/*,/usr/local/etc/openresty/conf.d/*,nginx.conf set ft=nginx | syntax on
 au BufRead,FileReadPost *.inc,*.php,*.js,*.css,*.html %s/\r/\r/ge
 " ========================= Normal Setting End =========================
+"

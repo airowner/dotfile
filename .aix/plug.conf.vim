@@ -224,7 +224,8 @@ if filereadable(editorconfig)
 endif
 
 " phpcd
-let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources.php = ['omni']
+" let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+" let g:deoplete#ignore_sources.php = ['omni']
+" call deoplete#custom#option('ignore_sources', {'php': ['omni']})
 
 "========================= Plugin Config End =========================
