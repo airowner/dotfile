@@ -41,7 +41,7 @@ noremap <Leader>da <Esc>:DoxAuthor<CR>
 "snipmate + snippets
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+"Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 " php snippets
 Plug 'chrisyue/my-snips', { 'for': 'php' }

@@ -107,10 +107,6 @@ alias gci="git commit -am"
 alias gco="git checkout"
 alias gcb="git checkout -b"
 alias gdiff="git diff -b -w --ignore-blank-lines --ignore-cr-at-eol --ignore-space-at-eol"
-alias zeal='/Applications/Zeal.app/Contents/MacOS/Zeal'
-alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-alias gvim="/Applications/MacVim.app/Contents/bin/gvim"
 
 fg() {
     if [[ $# -eq 1 && $1 = - ]]; then
@@ -128,63 +124,48 @@ bg() {
     fi
 }
 
-java_version=$(java --version | head -n 1 | awk '{print $2}')
-if [ -d "/Library/Java/JavaVirtualMachines/jdk-${java_version}.jdk" ];then
-  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-${java_version}.jdk/Contents/Home"
-  export PATH="$JAVA_HOME:$PATH"
-fi
 
-if [ -d "/usr/local/opt/go/libexec" ];then
-  export GOROOT="/usr/local/opt/go/libexec"
-  export GOPATH="$HOME/go"
-  export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
-  export GO111MODULE=on
-  export GOPROXY=https://mirrors.aliyun.com/goproxy/,https://goproxy.cn
-fi
-if [ -d "/Applications/calibre.app" ];then
-  export EBOOK_PATH="/Applications/calibre.app/Contents/MacOS"
-  export PATH="$PATH:$EBOOK_PATH"
-fi
+#mac os setting
+Drawin=$(uname | grep Drawin)
+if [ ! -z $Drawin ];then
 
-#export PATH="/usr/local/opt/qt/bin:$PATH"
-# export PATH="/usr/local/opt/node@6/bin:$PATH"
+  alias zeal='/Applications/Zeal.app/Contents/MacOS/Zeal'
+  alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+  alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+  alias gvim="/Applications/MacVim.app/Contents/bin/gvim"
 
-fpath=(/usr/local/share/zsh-completions $fpath)
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/opt/zsh-git-prompt/zshrc.sh
-source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+  if [ -d "/usr/local/opt/go/libexec" ];then
+    export GOROOT="/usr/local/opt/go/libexec"
+    export GOPATH="$HOME/go"
+    export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
+    export GO111MODULE=on
+    export GOPROXY=https://mirrors.aliyun.com/goproxy/,https://goproxy.cn
+  fi
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+  java_version=$(java -version | head -n 1 | awk '{print $2}')
+  if [ -d "/Library/Java/JavaVirtualMachines/jdk-${java_version}.jdk" ];then
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-${java_version}.jdk/Contents/Home"
+    export PATH="$JAVA_HOME:$PATH"
+  fi
 
-if [ -d "${HOME}/.nvm" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  # place this after nvm initialization!
-  autoload -U add-zsh-hook
-  load-nvmrc() {
-    local node_version="$(nvm version)"
-    local nvmrc_path="$(nvm_find_nvmrc)"
+  fpath=(/usr/local/share/zsh-completions $fpath)
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/local/opt/zsh-git-prompt/zshrc.sh
+  source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
 
-    if [ -n "$nvmrc_path" ]; then
-      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+  if [ -d "/Applications/calibre.app" ];then
+    export EBOOK_PATH="/Applications/calibre.app/Contents/MacOS"
+    export PATH="$PATH:$EBOOK_PATH"
+  fi
 
-      if [ "$nvmrc_node_version" = "N/A" ]; then
-        nvm install
-      elif [ "$nvmrc_node_version" != "$node_version" ]; then
-        nvm use
-      fi
-    elif [ "$node_version" != "$(nvm version default)" ]; then
-      echo "Reverting to nvm default version"
-      nvm use default
-    fi
-  }
-  add-zsh-hook chpwd load-nvmrc
-  load-nvmrc
+
+  fpath=(/usr/local/share/zsh-completions $fpath)
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/local/opt/zsh-git-prompt/zshrc.sh
+  source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 else
-  #install nodejs
-  #brew install node
-  #install nvm
-  echo need install nvm see https://github.com/nvm-sh/nvm
-  #curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
 fi

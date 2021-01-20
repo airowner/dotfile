@@ -72,11 +72,28 @@ if [ ! -d "$HOME/.vim/autoload/" ]; then
   mkdir $HOME/.vim/autoload/
 fi
 
+printf "\033[36mChecking python3 install...\033[0m\n"
+hash python3 2>/dev/null || { echo >&2 "Require python3 is not installed! Please install python3 before you prefix config pip3"; exit 1; }
+if [ ! -f /usr/local/bin/python3 ]; then
+  ln -s `which python3` /usr/local/bin/python3
+fi
+printf "\033[36mChecking python3 Completed!\033[0m\n"
+
+printf "\033[36mChecking pip3 install...\033[0m\n"
+hash pip3 2>/dev/null || { echo >&2 "Require pip3 is not installed! Please install pip3 before you prefix config pynvim"; exit 1; }
+printf "\033[36mChecking python3 Completed!\033[0m\n"
+
 pip3 install --user pynvim
 
-echo "Clone Vim-Plug Plugin..."
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
- https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [ ! -f ~/.vim/autoload/plug.vim ]; then
+  echo "Clone Vim-Plug Plugin..."
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs -k \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  if [ ! -f ~/.vim/autoload/plug.vim ]; then
+    printf "\033[33mplug.vim download failed! please redownload manually https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim to ~/.vim/autoload/ \033[0m\n"
+    exit 1;
+  fi
+fi
 printf "\033[33mVim-Plug has Install && Exist\033[0m\n"
 
 printf "\033[33mChecking Completed!\033[0m\n"
@@ -107,7 +124,7 @@ ln -sf `pwd`/.htmlhintrc $HOME/.htmlhintrc
 
 # oh my zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
-	git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+  git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 fi
 
 # # support NeoVim
