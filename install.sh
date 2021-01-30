@@ -5,6 +5,10 @@
 
 printf "\033[33mChecking Start...\033[0m\n"
 
+hash composer 2>/dev/null && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+hash npm 2>/dev/null && npm install -g cnpm --registry=https://registry.npm.taobao.org
+alias npm="cnpm"
+
 printf "\033[36mChecking Git install...\033[0m\n"
 hash git 2>/dev/null || { echo >&2 "Require Git is not installed! Please install Git before you prefix config aix"; exit 1; }
 git --version
