@@ -207,3 +207,5 @@ au BufNewFile,BufRead /etc/nginx/*,/usr/local/nginx/*,/usr/local/etc/openresty/c
 au BufRead,FileReadPost *.inc,*.php,*.js,*.css,*.html %s/\r/\r/ge
 " ========================= Normal Setting End =========================
 "
+"
+autocmd FileType make setlocal noexpandtab

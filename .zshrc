@@ -90,14 +90,20 @@ source $ZSH/oh-my-zsh.sh
 # alias mvim='/Applications/MacVim.app/Contents/MacOS/MacVim -v'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f ~/.bin/buf/share/zsh/site-functions/_buf ]; then
+  export PATH=${PATH}:~/.bin/buf/bin
+  source ~/.bin/buf/share/zsh/site-functions/_buf
+fi
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 # export REACT_EDITOR=mvim
 export PATH=$HOME/.composer/vendor/bin:$HOME/.bin:${PATH}
-export HOMEBREW_GITHUB_API_TOKEN=cfaa2cd5fed3ae4f570df63edcf2f0a29289e348
-export COMPOSER_AUTH='{"github-oauth": {"github.com": "cfaa2cd5fed3ae4f570df63edcf2f0a29289e348"}}'
+#export HOMEBREW_GITHUB_API_TOKEN=0fa1862c77ffafaf6ec21f5d03b6897981f5cfc9
+export HOMEBREW_GITHUB_API_TOKEN=2763c158080a1ccf242e94ce145b97c174aa6b40
+#export COMPOSER_AUTH='{"github-oauth": {"github.com": "cfaa2cd5fed3ae4f570df63edcf2f0a29289e348"}}'
+export COMPOSER_AUTH='{"github-oauth": {"github.com": "2763c158080a1ccf242e94ce145b97c174aa6b40"}}'
 
 # export PAGER=vimpager
 #eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
@@ -126,8 +132,12 @@ bg() {
 
 
 #mac os setting
-Drawin=$(uname | grep Drawin)
-if [ ! -z $Drawin ];then
+Darwin=$(uname | grep Darwin)
+if [ ! -z $Darwin ];then
+
+  if [ -d "/usr/local/opt/curl" ]; then
+    alias curl='/usr/local/opt/curl/bin/curl'
+  fi
 
   alias zeal='/Applications/Zeal.app/Contents/MacOS/Zeal'
   alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
@@ -139,7 +149,7 @@ if [ ! -z $Drawin ];then
     export GOPATH="$HOME/go"
     export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
     export GO111MODULE=on
-    export GOPROXY=https://mirrors.aliyun.com/goproxy/,https://goproxy.cn
+    export GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy/,direct
   fi
 
   java_version=$(java -version | head -n 1 | awk '{print $2}')
@@ -147,11 +157,6 @@ if [ ! -z $Drawin ];then
     export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-${java_version}.jdk/Contents/Home"
     export PATH="$JAVA_HOME:$PATH"
   fi
-
-  fpath=(/usr/local/share/zsh-completions $fpath)
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  source /usr/local/opt/zsh-git-prompt/zshrc.sh
-  source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
 
   if [ -d "/Applications/calibre.app" ];then
     export EBOOK_PATH="/Applications/calibre.app/Contents/MacOS"

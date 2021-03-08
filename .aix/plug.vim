@@ -204,6 +204,7 @@ Plug 'cormacrelf/vim-colors-github'
 Plug 'junegunn/seoul256.vim'
 " Plug 'aereal/vim-colors-japanesque'
 Plug 'airowner/vim-colors-japanesque'
+Plug 'connorholyday/vim-snazzy'
 
 " Plug 'gregsexton/gitv'
 " Plug 'bagrat/vim-workspace'
