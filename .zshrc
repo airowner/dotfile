@@ -8,7 +8,8 @@ export ZSH=$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="terminalparty"
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -101,9 +102,9 @@ export EDITOR=vim
 # export REACT_EDITOR=mvim
 export PATH=$HOME/.composer/vendor/bin:$HOME/.bin:${PATH}
 #export HOMEBREW_GITHUB_API_TOKEN=0fa1862c77ffafaf6ec21f5d03b6897981f5cfc9
-export HOMEBREW_GITHUB_API_TOKEN=2763c158080a1ccf242e94ce145b97c174aa6b40
+export HOMEBREW_GITHUB_API_TOKEN=037ae7ba45c6089a2e2c8b1cc9f6e712833fddc1
 #export COMPOSER_AUTH='{"github-oauth": {"github.com": "cfaa2cd5fed3ae4f570df63edcf2f0a29289e348"}}'
-export COMPOSER_AUTH='{"github-oauth": {"github.com": "2763c158080a1ccf242e94ce145b97c174aa6b40"}}'
+export COMPOSER_AUTH='{"github-oauth": {"github.com": "037ae7ba45c6089a2e2c8b1cc9f6e712833fddc1"}}'
 
 # export PAGER=vimpager
 #eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"

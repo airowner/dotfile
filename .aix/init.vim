@@ -208,4 +208,6 @@ au BufRead,FileReadPost *.inc,*.php,*.js,*.css,*.html %s/\r/\r/ge
 " ========================= Normal Setting End =========================
 "
 "
-autocmd FileType make setlocal noexpandtab
+autocmd FileType make setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType yml setlocal tabstop=2 shiftwidth=2 softtabstop=2
