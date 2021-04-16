@@ -101,10 +101,6 @@ export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 # export REACT_EDITOR=mvim
 export PATH=$HOME/.composer/vendor/bin:$HOME/.bin:${PATH}
-#export HOMEBREW_GITHUB_API_TOKEN=0fa1862c77ffafaf6ec21f5d03b6897981f5cfc9
-export HOMEBREW_GITHUB_API_TOKEN=037ae7ba45c6089a2e2c8b1cc9f6e712833fddc1
-#export COMPOSER_AUTH='{"github-oauth": {"github.com": "cfaa2cd5fed3ae4f570df63edcf2f0a29289e348"}}'
-export COMPOSER_AUTH='{"github-oauth": {"github.com": "037ae7ba45c6089a2e2c8b1cc9f6e712833fddc1"}}'
 
 # export PAGER=vimpager
 #eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
@@ -175,3 +171,5 @@ if [ ! -z $Darwin ];then
 else
 
 fi
+
+test -f "${HOME}/.security.sh" && source "${HOME}/.security.sh"
